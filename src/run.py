@@ -3,6 +3,7 @@ from aiogram import Dispatcher, Bot
 
 from core import config as cfg
 from utils.logging import setup_logger
+from handlers.start import start_router
 from handlers.registration import registration_router
 
 logger = setup_logger()
@@ -10,7 +11,14 @@ logger = setup_logger()
 
 async def setup_handlers(dp: Dispatcher) -> None:
     logger.info('Start setup handlers')
-    dp.include_router(registration_router)
+
+    routers = (
+        start_router,
+        registration_router,
+    )
+    for router in routers:
+        dp.include_router(router)
+
     logger.info('End setup handlers')
 
 
