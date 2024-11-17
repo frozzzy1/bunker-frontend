@@ -3,7 +3,7 @@ from core.config import SERVICE_BASE_URL
 
 
 class UserRepository:
-    @staticmethod
-    async def add_user(data: dict) -> None:
+    async def add_user(self, data: dict) -> None:
+        return
         url = f'{SERVICE_BASE_URL}/users'
         await fetch_post(url, data)

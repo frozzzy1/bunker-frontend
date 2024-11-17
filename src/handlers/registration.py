@@ -35,7 +35,8 @@ async def start_registration_handler(msg: Message, state: FSMContext) -> Any:
     RegistrationState.assignment_name,
 )
 async def assignment_name_handler(msg: Message, state: FSMContext) -> Any:
-    await UserService.create_user(msg.from_user.id, msg.text)
+    user_service = UserService()
+    await user_service.create_user(msg.from_user.id, msg.text)
     await msg.answer(
         text='Отлично! Теперь тебе доступны основные функции бота',
     )
