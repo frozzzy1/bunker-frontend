@@ -5,6 +5,7 @@ from core import config as cfg
 from utils.logging import setup_logger
 from handlers.start import start_router
 from handlers.registration import registration_router
+from handlers.room import room_router
 
 logger = setup_logger()
 
@@ -15,6 +16,7 @@ async def setup_handlers(dp: Dispatcher) -> None:
     routers = (
         start_router,
         registration_router,
+        room_router,
     )
     for router in routers:
         dp.include_router(router)
