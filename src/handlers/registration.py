@@ -4,6 +4,8 @@ from aiogram import Router, F
 from aiogram.types import Message
 from aiogram.fsm.context import FSMContext
 
+from states.menu import MenuState
+from utils.abstract_row_keyboard import make_row_keyboard
 from utils.logging import setup_logger
 from states.registration import RegistrationState
 from services.user import UserService
@@ -38,6 +40,8 @@ async def assignment_name_handler(msg: Message, state: FSMContext) -> Any:
     user_service = UserService()
     await user_service.create_user(msg.from_user.id, msg.text)
     await msg.answer(
-        text='Отлично! Теперь тебе доступны основные функции бота',
+        text='Отлично! Теперь тебе доступны основные функции бота.',
+        reply_markup=make_row_keyboard(MenuState.available_actions_text),
     )
+    await state.set_state(MenuState.choice_action_in_menu)
     return
